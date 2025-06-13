@@ -22,6 +22,7 @@ const Signup = () => {
                 'Content-Type': 'application/json',
                 'X-Device-Id': deviceId,
                 },
+                withCredentials: true,
             });
             if( res.data === "Success" ){ 
                 router.push('/verify'); 
