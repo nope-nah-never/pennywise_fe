@@ -6,9 +6,17 @@ import Login from '../login/page';
 const Landing = () => {
 
   const [status, setStatus] = useState<'loading' | 'logged_in' | 'login_required'>('loading');
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
 
   useEffect(()=> {
+
+    if(localStorage.getItem("userEmail")!== null){
+
+      setStatus("logged_in")
+      setUser(localStorage.getItem("userEmail") || "")
+
+    } else {
+
     const deviceId = generateDeviceId()
 
     axios.get("http://localhost:8080/auth/login", {withCredentials: true, 
@@ -25,6 +33,7 @@ const Landing = () => {
           setStatus("login_required")
       }
     });
+    }
 
   },[]);
 
